@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="wangwei.dao.ClazzDAO">
+<!--    &lt;!&ndash;    查全部小组信息&ndash;&gt;-->
+    <resultMap id="selectAllResultMap" type="clazz">
+        <id column="cla_id" property="id"/>
+        <result column="cla_name" property="name"/>
+        <result column="cla_path" property="path"/>
+
+        <collection property="tags" javaType="tag">
+            <id column="tag_id" property="id"/>
+            <result column="tg_name" property="name"/>
+        </collection>
+
+    </resultMap>
+    <select id="selectAll" resultMap="selectAllResultMap">
+        select  cla.id as cla_id, cla.name as cla_name,
+                cla.path as cla_path,
+                tg.id as tg_id,
+                tg.name  as tg_name
+        from `clazz` cla
+                 left join tag tg
+                           on cla.tag_id = tg.id
+    </select>
+    <!--    删除班级-->
+    <delete id="deleteAll" parameterType="clazz">
+        delete
+        from clazz
+        where id = #{id}
+    </delete>
+    <!--    添加班级-->
+    <insert id="insertAll" parameterType="clazz">
+        insert into clazz(name, path, tag_id)
+        values (#{name}, #{path}, #{tag_id})
+    </insert>
+</mapper>

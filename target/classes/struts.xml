@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+    <package name="load" extends="struts-default" namespace="/load">
+<!--        验证码-->
+        <action name="code" class="wangwei.util.ValidationCodeAction">
+            <result name="success"></result>
+        </action>
+<!--        注册-->
+        <action name="regist" class="wangwei.controller.LoadController" method="regist">
+            <result name="success">/back/login.jsp</result>
+        </action>
+<!--        登陆-->
+        <action name="login" class="wangwei.controller.LoadController" method="login">
+            <result name="success">/back/main/main.jsp</result>
+            <result name="error1">/back/error/codeError.jsp</result>
+            <result name="error2">/back/error/accountError.jsp</result>
+            <result name="error3">/back/error/passwordError.jsp</result>
+        </action>
+<!--        登出-->
+        <action name="logout" class="wangwei.controller.LoadController" method="logout">
+            <result name="success">/back/login.jsp</result>
+        </action>
+    </package>
+
+<!--    学生信息模块-->
+    <package name="getStudent" extends="struts-default" namespace="/student">
+<!--        获取所有学生信息-->
+        <action name="getList" class="wangwei.controller.StudentController" method="getList">
+            <result name="success">/back/student/index.jsp</result>
+        </action>
+<!--        获取小组城市备注选项-->
+        <action name="getMany" class="wangwei.controller.StudentController" method="getMany">
+            <result name="success">/back/student/add.jsp</result>
+        </action>
+        <action name="addStudent" class="wangwei.controller.StudentController" method="addStudent">
+            <result name="success" type="redirect">/student/getList</result>
+        </action>
+        <action name="changeStudent" class="wangwei.controller.StudentController" method="changeStudent">
+            <result name="success">/back/student/update.jsp</result>
+        </action>
+        <action name="updateStudent" class="wangwei.controller.StudentController" method="updateStudent">
+            <result name="success" type="redirect">/student/getList</result>
+        </action>
+<!--        删除学生信息-->
+        <action name="removeStudent" class="wangwei.controller.StudentController" method="removeStudent">
+            <result name="success" type="redirect">/student/getList</result>
+        </action>
+    </package>
+
+<!--    小组模块-->
+    <package name="getGroup" extends="struts-default" namespace="/group">
+<!--        获取小组所有信息-->
+        <action name="getAll" class="wangwei.controller.GroupController" method="getAll">
+            <result name="success">/back/group/index.jsp</result>
+        </action>
+<!--        查询所有班级-->
+        <action name="findClazz" class="wangwei.controller.GroupController" method="findClazz">
+            <result name="success">/back/group/add.jsp</result>
+        </action>
+<!--        添加小组-->
+        <action name="addGroup" class="wangwei.controller.GroupController" method="addGroup">
+            <result name="success" type="redirect">/group/getAll</result>
+        </action>
+        <action name="removeGroup" class="wangwei.controller.GroupController" method="removeGroup">
+            <result name="success" type="redirect">/group/getAll</result>
+        </action>
+    </package>
+
+<!--    班级模块-->
+    <package name="getClazz" extends="struts-default" namespace="/clazz">
+<!--        获取班级所有信息-->
+        <action name="getAll" class="wangwei.controller.ClazzController" method="getAll">
+            <result name="success">/back/clazz/index.jsp</result>
+        </action>
+<!--        删除班级-->
+        <action name="deleteAll" class="wangwei.controller.ClazzController" method="deleteAll">
+            <result name="success" type="redirect">/clazz/getAll</result>
+        </action>
+<!--        查询所有标签-->
+        <action name="findAllTag" class="wangwei.controller.ClazzController" method="findAllTag">
+            <result name="success">/back/clazz/add.jsp</result>
+        </action>
+<!--        添加班级-->
+        <action name="addClazz" class="wangwei.controller.ClazzController" method="addClazz">
+            <result name="success" type="redirect">/clazz/getAll</result>
+            <param name="path">/back/statics/imgs</param>
+        </action>
+    </package>
+
+<!--    标签模块-->
+    <package name="getTag" extends="struts-default" namespace="/tag">
+<!--        获取标签所有信息-->
+        <action name="getAll" class="wangwei.controller.TagController" method="getAll">
+            <result name="success">/back/tag/index.jsp</result>
+        </action>
+<!--        新增标签-->
+        <action name="addTag" class="wangwei.controller.TagController" method="addTag">
+            <result name="success" type="redirect">/tag/getAll</result>
+        </action>
+<!--        删除标签-->
+        <action name="deleteTag" class="wangwei.controller.TagController" method="deleteTag">
+            <result name="success" type="redirect">/tag/getAll</result>
+        </action>
+    </package>
+
+<!--    城市模块-->
+    <package name="getCity" extends="struts-default" namespace="/city">
+<!--        获取城市所有信息-->
+        <action name="getAll" class="wangwei.controller.CityController" method="getAll">
+            <result name="success">/back/city/index.jsp</result>
+        </action>
+<!--        添加城市-->
+        <action name="addCity" class="wangwei.controller.CityController" method="addCity">
+            <result name="success" type="redirect">/city/getAll</result>
+        </action>
+<!--        删除城市-->
+        <action name="deleteCity" class="wangwei.controller.CityController" method="deleteCity">
+            <result name="success" type="redirect">/city/getAll</result>
+        </action>
+    </package>
+</struts>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+	<properties resource="jdbc.properties"/>
+	<typeAliases>
+		<typeAlias type="wangwei.entity.User" alias="user"/>
+		<typeAlias type="wangwei.entity.Student" alias="student"/>
+		<typeAlias type="wangwei.entity.Group" alias="group"/>
+		<typeAlias type="wangwei.entity.Clazz" alias="clazz"/>
+		<typeAlias type="wangwei.entity.Tag" alias="tag"/>
+		<typeAlias type="wangwei.entity.City" alias="city"/>
+	</typeAliases>
+<!--	数据库的连接环境:default:指定当前应用默认使用哪个数据库-->
+	<environments default="mysql">
+<!--		数据库的连接环境 id：当前连接环境的名字-->
+		<environment id="mysql">
+<!--			事务管理的设置 type="JDBC":使用的是JDBC的方式控制事务
+				type:"JPA":使用的是分布式事务控制
+-->
+			<transactionManager type="JDBC"></transactionManager>
+<!--			type是指定mybatis的连接池类型 POOLED:框架默认连接池-->
+			<dataSource type="POOLED">
+				<property name="driver" value="${driver}"/>
+				<property name="url" value="${url}"/>
+				<property name="username" value="${username}"/>
+				<property name="password" value="${password}"/>
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<mapper resource="mapper/UserDAOImpl.xml"/>
+		<mapper resource="mapper/StudentDAOImpl.xml"/>
+		<mapper class="wangwei.controller.StudentController"/>
+		<mapper resource="mapper/GroupDAOImpl.xml"/>
+		<mapper resource="mapper/ClazzDAOImpl.xml"/>
+		<mapper resource="mapper/TagDAOImpl.xml"/>
+		<mapper resource="mapper/CityDAOImpl.xml"/>
+	</mappers>
+</configuration>
